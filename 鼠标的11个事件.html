@@ -1,0 +1,122 @@
+<!--
+鼠标的11个事件：
+1 click：按下鼠标时触发
+2 dblclick：双击鼠标时触发
+3 mousedown：按下鼠标时触发
+4 mouseup：释放按下的鼠标键时触发
+5 mousemove：当鼠标在一个节点内部移动时触发。
+  当鼠标连续移动时，该事件会连续触发。
+  为了避免性能问题，建议对该事件的监听函数做一些限定，比如限定一段时间只能运行一次。
+6 mouseenter：鼠标进入一个节点时触发，进入子节点不会触发这个事件
+7 mouseover：鼠标进入一个节点时触发，进入子节点会再一次触发这个事件
+8 mouseout：鼠标离开一个节点时触发，离开父节点也会触发这个事件
+9 mouseleave：鼠标离开一个节点时触发，离开父节点不会触发该事件
+10 contextmenu： 按下鼠标右键（上下文菜单出现前）时触发，或者按下"上下文菜单键"时触发
+11 wheel：滚动鼠标的滚轮时触发，该事件继承的是WheelEvent接口
+-->
+
+<!--
+加on与不加on的事件的区别：
+加on是在点击事件的时候自动触发。
+不加on需要手动注册click事件，比如$("#btn1").click=function(){}
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鼠标的11个事件</title>
+  <style>
+    body {
+      margin: 10px;
+      padding: 0;
+    }
+    button {
+      width: 100px;
+      height: 40px;
+      background-color: #fda;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .box {
+      width: 240px;
+      height: 120px;
+      background-color: darkgrey;
+    }
+  </style>
+</head>
+<body>
+<button id="click">click</button>
+<button id="dblclick">dblclick</button>
+<button id="mousedown">mousedown</button>
+<button class="mouseup">mouseup</button>
+<div id="mouseenter">
+  <h4>mouseenter</h4>
+  <h4>mouseover</h4>
+  <div class="box"></div>
+</div>
+<div id="mouseout">
+  <h4>mouseout</h4>
+  <div class="box"></div>
+</div>
+<div id="mouseleave">
+  <h4>mouseleave</h4>
+  <div class="box"></div>
+</div>
+<div id="contextmenu">
+  <h4>contextmenu</h4>
+  <div class="box"></div>
+</div>
+
+<script type="text/javascript">
+  click.addEventListener('click', function () {
+    alert("click");
+  });
+
+  dblclick.addEventListener('dblclick', function () {
+    alert("dblclick");
+  });
+
+  mousedown.addEventListener("mousedown", function () {
+    alert("mousedown");
+  });
+
+  mouseup.addEventListener("mouseup", function () {
+    alert("mouseup");
+  });
+
+  document.addEventListener("mousemove", function () {
+    alert("mousemove");
+  });
+
+  mouseenter.addEventListener("mouseenter", function () {
+    alert("mouseenter");
+  });
+
+  mouseenter.addEventListener("mouseover", function () {
+    alert("mouseover");
+  });
+
+  mouseout.addEventListener('mouseout', function () {
+    console.log('i am mouseout')
+  });
+
+  mouseleave.addEventListener('mouseleave', function () {
+    console.log('i am mouseleva')
+  });
+
+  contextmenu.addEventListener('contextmenu',function(){
+    console.log('i am contextmenu')
+  });
+
+  document.addEventListener('wheel',function(){
+    console.log('i am mousewheel')
+  });
+  // document.getElementById("#mousedown").addEventListener('mousedown', function () {
+  //   alert("mousedown")
+  // }, false);
+</script>
+
+</body>
+</html>
