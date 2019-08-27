@@ -116,6 +116,25 @@
   // document.getElementById("#mousedown").addEventListener('mousedown', function () {
   //   alert("mousedown")
   // }, false);
+
+  //键盘事件：
+  //1 keydown：按下键盘时触发
+  //2 keypress：按下具体的键盘值触发，对有值的事件，按下时首先会触发keydown事件，再触发这个事件
+  //3 keyup：松开键盘时触发。
+  // 触发事件顺序：如果用户一直按着键盘不放，首先会触发keydown--keypress--keydown--keypress，直到键盘抬起触发keyup
+  test = () => {
+    console.log("test");
+  };
+  document.body.addEventListener("keydown", function (e) {
+    console.log(e.key);
+    switch (e.key) {
+      case 'Enter':
+        this.test();
+        break;
+      case 'h':
+        console.log('h事件');
+        break;
+    }}, false)
 </script>
 
 </body>
