@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>九种水平垂直居中的方法</title>
+  <style>
+    /*1 flex*/
+    .wrapper-one {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      background: radial-gradient(circle closest-corner at 50% 50%, red, blue, green);
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /*2 flex + margin*/
+    .wrapper-two {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      display: flex;
+
+      box-shadow: -10px 0 10px red,
+                  10px 0 10px yellow,
+                  0 -10px 10px blue,
+                  0 10px 10px green;
+    }
+    .wrapper-two > p {
+      margin: auto;
+    }
+    /*3 transform + absolute*/
+    .wrapper-three {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      position: relative;
+
+      /* 单位不仅仅局限于百分比，像素也是可以的 */
+      background: repeating-linear-gradient(45deg, white, white 10%, black 10%, black 20%)
+    }
+    .wrapper-three > p {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /*4 table-cell*/
+    .wrapper-four {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+
+      /*display: table-cell;*/
+      text-align: center;
+      vertical-align: middle;
+    }
+    /*5 absolute + 四个方向的值相等*/
+    .wrapper-five {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      position: relative;
+    }
+    .wrapper-five > p {
+      height: 20px;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 10px;
+      right: 10px;
+      bottom: 0;
+    }
+    /*6 writing-mode*/
+    .wrapper-six {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #ccc;
+
+      writing-mode: vertical-lr;
+      text-align: center;
+    }
+    .wrapper-six > .wrapper-inner {
+      writing-mode: horizontal-tb;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    .wrapper-six > .wrapper-inner > p {
+      display: inline-block;
+      margin: auto;
+      text-align: left;
+    }
+    /*7 ::after*/
+    .wrapper-seven {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #ccc;
+
+      text-align: center;
+    }
+    .wrapper-seven::after {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+    .wrapper-seven > p {
+      vertical-align: middle;
+    }
+    /*8 ::before*/
+    .wrapper-eight {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #ccc;
+      line-height: 300px;
+
+      text-align: center;
+      /*font-size: 0;*/
+    }
+    /*.wrapper-eight::before {*/
+      /*display: inline-block;*/
+      /*vertical-align: middle;*/
+      /*font-size: 14px;*/
+      /*content: '';*/
+      /*height: 100%;*/
+    /*}*/
+    .wrapper-eight > p {
+      /*vertical-align: middle;*/
+      /*font-size: 14px;*/
+    }
+    /*9 grid*/
+    .wrapper-nine {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #ccc;
+
+      display: grid;
+    }
+    .wrapper-nine > p {
+      align-self: center;
+      justify-self: center;
+    }
+  </style>
+</head>
+<body>
+<!--1.flex-->
+<div class="wrapper-one flex-center">
+  <p>1 horizontal and vertical</p>
+</div>
+<!--2.flex + margin-->
+<div class="wrapper-two flex-center">
+  <p>2 horizontal and vertical</p>
+</div>
+<!--3.transform + absolute
+      常用于图片的居中显示
+-->
+<div class="wrapper-three flex-center">
+  <p>3 horizontal and vertical</p>
+</div>
+<!--4.table-cell-->
+<div class="wrapper-four flex-center">
+  <p>4 horizontal and vertical</p>
+</div>
+<!--5.absolute + 四个方向的值相等
+      一般用于弹出层，需要设置弹出层的宽高
+-->
+<div class="wrapper-five">
+  <p>5 horizontal and vertical</p>
+</div>
+<!--6 writing-mode
+      可以改变文字的显示方向!-->
+<div class="wrapper-six">
+  <div class="wrapper-inner">
+    <p>6 horizontal and vertical</p>
+  </div>
+</div>
+<!--7 ::after
+      未看懂
+-->
+<div class="wrapper-seven">
+  <p>7 horizontal and vertical</p>
+</div>
+<!--8 ::before
+      未看懂，且未实现居中的效果
+-->
+<div class="wrapper-eight">
+  <p>8 horizontal and vertical</p>
+</div>
+<!--9 grid-->
+<div class="wrapper-nine">
+  <p>9 horizontal and vertical</p>
+</div>
+</body>
+</html>
