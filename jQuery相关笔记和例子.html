@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery相关笔记和例子</title>
+  <script type="text/javascript" src="./js/jquery.js"></script>
+</head>
+<body>
+<div>
+  <input type="checkbox" id="example1" /><label>我已阅读上面的协议</label>
+</div>
+<script type="text/javascript">
+  // window.onload和$(document).ready()的区别
+  // 前者不能编写多个，而后者可以；
+  // 前者没有简化的写法，后者简化的写法是$(function(){})；
+  // 前者的执行时机：必须等待页面中所有的内容（包括图片）加载完毕后才能执行，
+  // 后者的执行时机：网页中所有的DOM结构绘制完毕后就执行，可能DOM元素关联的东西并没有加载完。
+  $(document).ready(function () {
+    alert("document.ready");
+  });
+  window.onload = function () {
+    alert("window.onload")
+  };
+
+  // jQuery对象和DOM对象
+  // var $variable = jQuery对象;
+  // var variable = DOM对象;
+  // 两者之间的相互转换
+  // 1 jQuery转换成DOM对象，通过[index]的方法获取；
+  // 2 通过get(index)的方法获取
+
+  $(document).ready(function () {
+    var example1 = document.getElementById("example1");
+    var $example1 = $(example1);
+    $example1.click(function () {
+      // if (example1.checked) {
+      //   alert("确定签署该协议吗？");
+      // }
+      if ($example1.is(":checked")) {
+        alert("确定签署该协议吗？");
+      }
+    })
+  })
+
+  // 防止与其他jQuery库冲突
+  // jQuery.noConflict();//将控制权转交给其他的js库
+  // jQuery(function ($) {//使用jQuery设定页面加载时执行的函数
+  //   $("p").click(function () {//在函数内部继续使用$()方法
+
+    // })
+  // })
+
+  // jQuery选择器
+  // $("prev + next")选择器与next()方法是等价的：$(".one + div");等价于$(".one").next("div");
+  // $("prev ~ div")选择器与nextAll()方法是等价的：$(".one ~ div");等价于$(".one").nextAll("div");
+</script>
+</body>
+</html>
