@@ -9,18 +9,57 @@
 <div>
   <input type="checkbox" id="example1" /><label>我已阅读上面的协议</label>
 </div>
+
+<!--表单选择器-->
+<form id="form1" action="#">
+  <input type="button" value="button"/><br>
+  <input type="checkbox" name="test1"/><br>
+  <input type="checkbox" name="test2"/><br>
+  <input type="file"/><br>
+  <input type="hidden"/><br>
+  <input type="image"/><br>
+  <input type="password"/><br>
+  <input type="radio" name="a"/> 1 <input type="radio" name="a"/> 2 <br>
+  <input type="reset"/><br>
+  <input type="submit" value="Submit"/><br>
+  <input type="text"/><br>
+  <select><option>Option</option></select><br>
+  <textarea></textarea><br>
+  <button>Button</button><br>
+</form>
+
+<!--某网站品牌列表的效果-->
+<div class="brand-list">
+  <ul>
+    <li>索尼</li>
+    <li>三星</li>
+    <li>尼康</li>
+    <li>松下</li>
+    <li>卡西欧</li>
+    <li>富士</li>
+    <li>柯达</li>
+    <li>宾得</li>
+    <li>爱国者</li>
+    <li>其他品牌相机</li>
+  </ul>
+  <div class="show-more">
+    <a href="#">显示全部品牌</a>
+  </div>
+</div>
+
+
 <script type="text/javascript">
   // window.onload和$(document).ready()的区别
   // 前者不能编写多个，而后者可以；
   // 前者没有简化的写法，后者简化的写法是$(function(){})；
   // 前者的执行时机：必须等待页面中所有的内容（包括图片）加载完毕后才能执行，
   // 后者的执行时机：网页中所有的DOM结构绘制完毕后就执行，可能DOM元素关联的东西并没有加载完。
-  $(document).ready(function () {
-    alert("document.ready");
-  });
-  window.onload = function () {
-    alert("window.onload")
-  };
+  // $(document).ready(function () {
+  //   alert("document.ready");
+  // });
+  // window.onload = function () {
+  //   alert("window.onload")
+  // };
 
   // jQuery对象和DOM对象
   // var $variable = jQuery对象;
@@ -52,7 +91,41 @@
 
   // jQuery选择器
   // $("prev + next")选择器与next()方法是等价的：$(".one + div");等价于$(".one").next("div");
-  // $("prev ~ div")选择器与nextAll()方法是等价的：$(".one ~ div");等价于$(".one").nextAll("div");
+  // $("prev ~ siblings")选择器与nextAll()方法是等价的：$(".one ~ div");等价于$(".one").nextAll("div");
+
+  //过滤选择器：通过特定的过滤规则来筛选出所需的DOM元素，过滤规则与CSS中的伪类选择器语法相同，即选择器都以一个冒号开头
+  //          过滤器分为基本过滤、内容过滤、可见性过滤、属性过滤、子元素过滤和表单对象属性过滤选择器
+  // :first 选取第一个元素
+  // :last  选取最后一个元素
+  // :not(selector) 不选择指定的元素
+  // :even  选取索引是偶数的所有元素
+  // :odd   选取索引是奇数的所有元素
+  // :eq(index) 选取索引等于index的所有元素
+  // :gt(index) 选取索引大于1的元素
+  // :lt(index) 选取索引小于1的元素
+  // :header  选取所有的标题元素
+  // :animated  选取当前正在执行动画的所有元素
+
+  // 内容过滤选择器：过滤规则主要体现在它所包含的子元素或文本内容上
+  // :contains(text)  选取含有文本内容为"text"的元素
+  // :empty 选取不包含子元素或者文本的空元素
+  // :has(selector)
+  // :parent
+
+  $(document).ready(function () {
+
+    // 表单选择器
+    $("#form1 :input").css("background", "yellow");//选取所有的<input> <textarea> <select> 和 <button> 元素
+    $("#form1 :file").css("background", "red");//选取所有的上传域
+
+    // 某网站品牌列表的效果
+    $(".brand-list").css({"border": "solid 1px grey", "border-radius": "15px", "margin-top": "20px"});
+    $(".brand-list ul li:gt(4):not(:last)").hide();//获取ul元素下索引值大于5的li元素的集合元素，然后去掉集合元素中的最后一个元素
+    $(".show-more a").css({"text-decoration": "none", "margin-left": "20px"});
+    $(".show-more a").click(function () {
+      $(".brand-list ul li:gt(4):not(:last)").toggle();
+    })
+  })
 </script>
 </body>
 </html>
