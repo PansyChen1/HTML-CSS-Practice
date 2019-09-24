@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery中的事件和动画</title>
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <style>
+    .highlight {
+      width: 10%;
+      background: #F30;
+    }
+    
+    .animate {
+      position: relative;/**必须要设置position的值**/
+      width: 40px;
+      height: 40px;
+      background: #FFee00;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .v_show {
+      width: 500px;
+      border: 1px solid #333;
+      margin-top: 30px;
+      padding: 10px;
+    }
+    .v_content_list img {
+      width: 320px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+<!--事件绑定-->
+<div id="panel">
+  <h3 class="head">什么是jQuery？</h3>
+  <div class="content">
+    jQuery是继Prototype之后又一个优秀的JavaScript库。
+  </div>
+</div>
+
+<!--事件冒泡-->
+<div id="content">
+  外层div元素
+  <span>内层span元素</span>
+  外层div元素
+</div>
+<div id="msg"></div>
+
+<div class="animate"></div>
+
+<!--某视频网的视频展示效果例子-->
+<div class="v_show">
+  <div class="v_caption">
+    <h2 class="cartoon" title="卡通动漫">卡通动漫</h2>
+    <div class="highlight_tip">
+      <span class="current">1</span><span>2</span><span>3</span><span>4</span>
+    </div>
+    <div class="change_btn">
+      <span class="prev">上一页</span>
+      <span class="next">下一页</span>
+    </div>
+    <em><a href="#">更多>></a></em>
+  </div>
+  <div class="v_content">
+    <div class="v_content_list">
+      <ul>
+        <li>
+          <a href="#"><img src="../assets/image/img_one.jpg" alt="夏目友人帐"/></a>
+          <h4><a href="#">夏目友人帐</a></h4>
+          <span>播放： <em>28,342</em></span>
+        </li>
+        <li>
+          <a href="#"><img src="../assets/image/img_two.jpg" alt="夏目友人帐"/></a>
+          <h4><a href="#">夏目友人帐</a></h4>
+          <span>播放： <em>222,333</em></span>
+        </li>
+        <li>
+          <a href="#"><img src="../assets/image/img_three.jpeg" alt="夏目友人帐"/></a>
+          <h4><a href="#">夏目友人帐</a></h4>
+          <span>播放： <em>4,332,021</em></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // 事件绑定
+    // bind(type, [, data], fn)
+    // type类型包括：blur/focus/load/resize/scroll/unload/click/dbclick/
+    // mousedown/mouseup/mouseover/mouseout/mouseenter/mouseleave/
+    // change/select/submit/keydown/keypress/keyup/error
+
+    // 合成事件
+    // hover(enter, leave) 用于模拟光标悬停事件，当光标移动到元素上时，触发第一个函数，移出时，触发第二个函数
+    // toggle()
+    // toggleClass()
+    $("#panel h3.head").bind("click", function () {
+      var content = $(this).next("div.content");
+      if (content.is(":visible")) {
+        // content.hide("fast");
+        // content.fadeOut();
+        content.slideUp();
+        $(this).removeClass("highlight");
+      } else {
+        // content.show("slow");
+        // content.fadeIn();
+        content.slideDown();
+        $(this).addClass("highlight");
+      }
+    })
+
+    // 事件冒泡
+    // 例如嵌套的元素都绑定click事件，在触发click事件时，都会触发
+    // event.preventDefault();
+    // event.stopPropagation();均可以改写为return false;
+
+    // 事件捕获
+
+    // 移除事件 unbind()
+    $("#content").css("margin-top", "30px");
+    $("span").bind("click", function (e) {
+      var txt = $("#msg").html() + "<p>内层span元素被点击</p>";
+      $("#msg").html(txt);
+      e.stopPropagation();
+    })
+
+    $("#content").bind("click", function () {
+      var txt = $("#msg").html() + "<p>内层span元素被点击</p>";
+      $("#msg").html(txt);
+      return false;
+    })
+
+    // $("body").bind("click", function (e) {
+    //   var txt = $("#msg").html() + "<p>内层span元素被点击</p>";
+    //   $("#msg").html(txt);
+    //   e.preventDefault();
+    // })
+
+    // jQuery中的动画
+        // show()和hide()两个方法会同时改变元素的高度/宽度和透明度
+        // show() 可以设置元素显示和隐藏的时间 slow/fast/或者设置毫秒时间
+        // hide()
+        // fadeIn() 改变元素的不透明度
+        // fadeOut() 在指定的一段时间内降低元素的不透明度，直到元素完全消失
+        // fadeTo() 把元素的不透明底以渐进方式调整到指定的值
+        // slideUp() 只改变元素的高度
+        // slideDown() 使得元素由上至下延伸显示
+        // slideToggle() 通过高度变化来切换匹配元素的可见性，只调整元素的高度
+        // animate(params, speed, callback) 自定义动画方法
+      // 停止动画
+        // stop([clearQueue][, gotoEnd])
+
+    $(".animate").click(function () {
+      // 累加累减动画，在当前位置的基础上累加或者累减
+      // 多重动画，按顺序执行多个动画
+      $(this).animate({left: "+=300px",height: "+=80px", width: "+=80px"}, 2000)
+          .animate({top: "20px"}, function () {
+            $(this).css("border", "2px solid blue");
+          });
+    })
+  })
+</script>
+</body>
+</html>
