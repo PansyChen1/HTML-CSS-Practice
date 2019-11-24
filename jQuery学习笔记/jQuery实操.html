@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery实操</title>
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <style>
+    .table-operation {
+      margin: 20px;
+    }
+    button {
+      width: 60px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid #FFee00;
+      background: #FFee00;
+      border-radius: 5px;
+    }
+    table {
+      margin-top: 20px;
+    }
+    table td {
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="table-operation">
+  <button class="select-all">全选</button>
+  <button class="delete">删除</button>
+  <table border="1">
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td class="show-detail">《平面国》</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td class="show-detail">《树上的男爵》</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td class="show-detail">《我想念我自己》</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td class="show-detail">《强风吹拂》</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"/></td>
+      <td class="show-detail">《小狗钱钱》</td>
+    </tr>
+  </table>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.select-all').click(function () {
+        $('table tr td input').attr('checked',true);
+      })
+      $('.delete').click(function () {
+        $('table tr').hide();
+      })
+      $('.test').css('display', 'none');
+      $('.show-detail').click(function () {
+        $(this).next('td').toggle();
+      })
+    })
+  </script>
+</div>
+
+</body>
+</html>
